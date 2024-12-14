@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!-- saved from url=(0099)file:///C:/Users/carlzhan/Desktop/%E6%96%B0%E5%BB%BA%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3%20(2).html -->
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灯具运费计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9fafc;
+            color: #333;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            box-sizing: border-box;
+        }
+        select:focus, input:focus {
+            border-color: #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        .result p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .profit-low {
+            color: red;
+            font-weight: bold;
+        }
+        .profit-high {
+            color: green;
+        }
+        .profit-details {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .profit-details p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>灯具运费计算器</h1>
+    <div class="container">
+        <div class="form-group">
+            <label for="address">选择配送地址</label>
+            <select id="address">
+                 <option value="广东">广东</option>
+                <option value="浙江">浙江</option>
+                <option value="江苏">江苏</option>
+                <option value="上海">上海</option>
+                <option value="江西">江西</option>
+                <option value="福建">福建</option>
+                <option value="广西壮族">广西壮族</option>
+                <option value="海南">海南</option>
+                <option value="湖南">湖南</option>
+                <option value="湖北">湖北</option>
+                <option value="安徽">安徽</option>
+                <option value="山东">山东</option>
+                <option value="河南">河南</option>
+                <option value="河北">河北</option>
+                <option value="天津">天津</option>
+                <option value="四川">四川</option>
+                <option value="山西">山西</option>
+                <option value="陕西">陕西</option>
+                <option value="重庆">重庆</option>
+                <option value="贵州">贵州</option>
+                <option value="云南">云南</option>
+                <option value="北京">北京</option>
+                <option value="辽宁">辽宁</option>
+                <option value="黑龙江">黑龙江</option>
+                <option value="吉林">吉林</option>
+                <option value="甘肃">甘肃</option>
+                <option value="宁夏回族">宁夏回族</option>
+                <option value="青海">青海</option>
+                <option value="内蒙古">内蒙古</option>
+                <option value="新疆维吾尔">新疆维吾尔</option>
+                <option value="西藏">西藏</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="lampType">选择灯具规格</label>
+            <select id="lampType">
+                <option value="low">单低 (11元)</option>
+                <option value="high">单高 (13.5元)</option>
+                <option value="doubleLow">双低 (13.5元)</option>
+                <option value="doubleHigh">双高 (16元)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantity">输入灯具数量</label>
+            <input type="number" id="quantity" min="1" placeholder="请输入灯具数量">
+        </div>
+        <div class="divider"></div>
+        <button onclick="calculate()">计算运费和总费用</button>
+        <div class="result" id="result">
+                <p>灯具总价: ￥1100.00</p>
+                <p>泡沫费用: ￥32.00</p>
+                <p>纸箱费用: ￥105.00</p>
+                <p>运费: ￥362.26</p>
+                <p><strong>总费用: ￥1599.26</strong></p>
+            </div>
+
+        <div class="form-group">
+            <label for="sellingPrice">输入每台灯的售价</label>
+            <input type="number" id="sellingPrice" placeholder="请输入每台灯具的售价">
+            <button onclick="calculateProfit()">计算利润</button>
+        </div>
+        <div class="profit-details" id="profitDetails">
+                <p>总售价: ￥2700.00</p>
+                <p>总费用: ￥1599.26</p>
+                <p>利润: ￥1100.74</p>
+                <p class="profit-high">
+                    利润占总售价百分比: 40.77%
+                </p>
+            <p><strong>利润水平:</strong></p><p class="profit-high">当利润 15% 时(￥282.22): 总售价 ￥1881.48 (单价 ￥18.81)</p><p class="profit-high">当利润 20% 时(￥399.81): 总售价 ￥1999.07 (单价 ￥19.99)</p><p class="profit-high">当利润 25% 时(￥533.09): 总售价 ￥2132.34 (单价 ￥21.32)</p><p class="profit-high">当利润 30% 时(￥685.40): 总售价 ￥2284.65 (单价 ￥22.85)</p><p class="profit-high">当利润 35% 时(￥861.14): 总售价 ￥2460.39 (单价 ￥24.60)</p><p class="profit-high">当利润 40% 时(￥1066.17): 总售价 ￥2665.43 (单价 ￥26.65)</p></div>
+    </div>
+    <footer>© 2024 灯具运费计算器 | 优化版</footer>
+
+    <script>
+        let totalCost = 0;
+        let quantity = 0;
+
+        function calculate() {
+            const address = document.getElementById("address").value;
+            const lampType = document.getElementById("lampType").value;
+            quantity = parseInt(document.getElementById("quantity").value);
+
+            if (isNaN(quantity) || quantity <= 0) {
+                alert("请输入有效的灯具数量");
+                return;
+            }
+
+            // 运费数据表
+            const shippingRates = {
+                "广东": { first: 8.64, additional: 1.378 },
+                "浙江": { first: 8.64, additional: 2.544 },
+                "江苏": { first: 8.64, additional: 2.544 },
+                "上海": { first: 8.64, additional: 2.544 },
+                "江西": { first: 8.64, additional: 2.544 },
+                "福建": { first: 8.64, additional: 2.544 },
+                "广西壮族": { first: 8.64, additional: 2.544 },
+                "海南": { first: 8.64, additional: 2.544 },
+                "湖南": { first: 8.64, additional: 2.544 },
+                "湖北": { first: 8.64, additional: 2.544 },
+                "安徽": { first: 8.64, additional: 2.756 },
+                "山东": { first: 8.64, additional: 2.756 },
+                "河南": { first: 8.64, additional: 2.756 },
+                "河北": { first: 8.64, additional: 2.756 },
+                "天津": { first: 8.64, additional: 2.756 },
+                "四川": { first: 8.64, additional: 2.756 },
+                "山西": { first: 8.64, additional: 2.756 },
+                "陕西": { first: 8.64, additional: 2.756 },
+                "重庆": { first: 8.64, additional: 2.756 },
+                "贵州": { first: 8.64, additional: 2.756 },
+                "云南": { first: 8.64, additional: 2.756 },
+                "北京": { first: 8.64, additional: 2.756 },
+                "辽宁": { first: 10.8, additional: 4.77 },
+                "黑龙江": { first: 10.8, additional: 4.77 },
+                "吉林": { first: 10.8, additional: 4.77 },
+                "甘肃": { first: 10.8, additional: 4.77 },
+                "宁夏回族": { first: 10.8, additional: 4.77 },
+                "青海": { first: 10.8, additional: 4.77 },
+                "内蒙古": { first: 10.8, additional: 4.77 },
+                "新疆维吾尔": { first: 16.2, additional: 10.6 },
+                "西藏": { first: 32.4, additional: 26.5 }
+            };
+
+            // 获取灯具单价
+            const lampPrices = {
+                "low": 11,
+                "high": 13.5,
+                "doubleLow": 13.5,
+                "doubleHigh": 16
+            };
+
+            const lampPrice = lampPrices[lampType];
+            const totalLampCost = lampPrice * quantity;
+
+            // 计算泡沫费用
+            const foamCost = Math.ceil(quantity / 10) * 3.2;
+
+            // 计算纸箱费用
+            const boxCosts = [5.4,5.4, 6.2, 7, 7.8, 8.6, 9, 9, 10.5, 10.5];
+            let totalBoxCost = 0;
+            const boxes = Math.ceil(quantity / 10); // 总箱数
+            for (let i = 0; i < boxes; i++) {
+                const itemsInBox = i === boxes - 1 ? (quantity % 10 || 10) : 10; // 每箱的物品数量
+                totalBoxCost += boxCosts[Math.min(itemsInBox, 10) - 1];
+            }
+
+            // 根据台数计算重量
+            const weights = [4, 4, 5, 6, 7, 8, 9, 10, 10, 14]; // 每台重量
+            const weight = quantity <= 10 ? weights[quantity - 1] : Math.ceil(quantity / 10) * 14;
+
+            // 运费计算
+            const rate = shippingRates[address];
+            const shippingCost = weight <= 1 
+                ? rate.first 
+                : rate.first + (weight - 1) * rate.additional;
+
+            // 总费用
+            totalCost = totalLampCost + foamCost + totalBoxCost + shippingCost;
+
+            // 显示结果
+            document.getElementById("result").innerHTML = `
+                <p>灯具总价: ￥${totalLampCost.toFixed(2)}</p>
+                <p>泡沫费用: ￥${foamCost.toFixed(2)}</p>
+                <p>纸箱费用: ￥${totalBoxCost.toFixed(2)}</p>
+                <p>运费: ￥${shippingCost.toFixed(2)}</p>
+                <p><strong>总费用: ￥${totalCost.toFixed(2)}</strong></p>
+            `;
+        }
+
+        function calculateProfit() {
+            const sellingPrice = parseFloat(document.getElementById("sellingPrice").value);
+            if (isNaN(sellingPrice) || sellingPrice <= 0) {
+                alert("请输入有效的售价");
+                return;
+            }
+
+            const totalSellingPrice = sellingPrice * quantity;
+            const profit = totalSellingPrice - totalCost;
+            const profitPercentage = (profit / totalSellingPrice) * 100;
+
+            let profitMessage = `
+                <p>总售价: ￥${totalSellingPrice.toFixed(2)}</p>
+                <p>总费用: ￥${totalCost.toFixed(2)}</p>
+                <p>利润: ￥${profit.toFixed(2)}</p>
+                <p class="${profitPercentage < 15 ? 'profit-low' : 'profit-high'}">
+                    利润占总售价百分比: ${profitPercentage.toFixed(2)}%
+                </p>
+            `;
+
+            if (profitPercentage >= 15) {
+                profitMessage += `<p><strong>利润水平:</strong></p>`;
+                for (let step = 15; step <= profitPercentage; step += 5) {
+                    const higherSellingPrice = totalCost / (1 - step / 100);
+                    const unitPrice = higherSellingPrice / quantity;
+                    profitMessage += `<p class="profit-high">当利润 ${step}% 时(￥${(higherSellingPrice*step / 100).toFixed(2)}): 总售价 ￥${higherSellingPrice.toFixed(2)} (单价 ￥${unitPrice.toFixed(2)})</p>`;
+                }
+            }
+
+            document.getElementById("profitDetails").innerHTML = profitMessage;
+        }
+    </script>
+
+
+</body></html>
