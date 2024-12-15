@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0099)file:///C:/Users/carlzhan/Desktop/%E6%96%B0%E5%BB%BA%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3%20(2).html -->
-<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>灯具运费计算器</title>
     <style>
@@ -136,6 +136,25 @@
                 <option value="high">单高 (13.5元)</option>
                 <option value="doubleLow">双低 (13.5元)</option>
                 <option value="doubleHigh">双高 (16元)</option>
+                <option value="c_dan_28">侧发光 单低28w (28元)</option>
+                <option value="c_dan_30">侧发光 单高38w (30元)</option>
+                <option value="c_shuang_28">侧发光 双低28w (38元)</option>
+                <option value="c_shuang_38">侧发光 双高38w (41元)</option>
+                <option value="c_30_120_38">侧发光30*120 38w (38元)</option>
+                <option value="c_30_120_48">侧发光30*120 48w (44元)</option>
+                <option value="c_30_120_78">侧发光30*120 双驱78w (53元)</option>
+                <option value="c_60_120_78">侧发光60*120 双驱78w (95元)</option>
+                 <option value="30_30">净化灯 30*30 (17元)</option>
+                  <option value="30_60">净化灯 30*60 (27元)</option>
+                   <option value="30_90">净化灯 30*90 (36元)</option>
+                    <option value="30_120_40">净化灯 30*120 40瓦(31元)</option>
+                      <option value="30_120_48">净化灯 30*120 48瓦(39元)</option>
+                      <option value="30_120_78">净化灯 30*120 双78瓦(46元)</option>
+                      <option value="30_120_fb">净化灯 30*120 防爆款(120元)</option>
+                           <option value="60_60_40">净化灯 60*60 40瓦(34元)</option>
+                                <option value="60_60_48">净化灯 60*60 48瓦 宽压(45元)</option>
+                                     <option value="60_60_78">净化灯 60*60 双78瓦(50元)</option>
+                                          <option value="60_120">净化灯 60*120 双78瓦(95元)</option>
             </select>
         </div>
         <div class="form-group">
@@ -144,27 +163,14 @@
         </div>
         <div class="divider"></div>
         <button onclick="calculate()">计算运费和总费用</button>
-        <div class="result" id="result">
-                <p>灯具总价: ￥1100.00</p>
-                <p>泡沫费用: ￥32.00</p>
-                <p>纸箱费用: ￥105.00</p>
-                <p>运费: ￥362.26</p>
-                <p><strong>总费用: ￥1599.26</strong></p>
-            </div>
+        <div class="result" id="result"></div>
 
         <div class="form-group">
             <label for="sellingPrice">输入每台灯的售价</label>
             <input type="number" id="sellingPrice" placeholder="请输入每台灯具的售价">
             <button onclick="calculateProfit()">计算利润</button>
         </div>
-        <div class="profit-details" id="profitDetails">
-                <p>总售价: ￥2700.00</p>
-                <p>总费用: ￥1599.26</p>
-                <p>利润: ￥1100.74</p>
-                <p class="profit-high">
-                    利润占总售价百分比: 40.77%
-                </p>
-            <p><strong>利润水平:</strong></p><p class="profit-high">当利润 15% 时(￥282.22): 总售价 ￥1881.48 (单价 ￥18.81)</p><p class="profit-high">当利润 20% 时(￥399.81): 总售价 ￥1999.07 (单价 ￥19.99)</p><p class="profit-high">当利润 25% 时(￥533.09): 总售价 ￥2132.34 (单价 ￥21.32)</p><p class="profit-high">当利润 30% 时(￥685.40): 总售价 ￥2284.65 (单价 ￥22.85)</p><p class="profit-high">当利润 35% 时(￥861.14): 总售价 ￥2460.39 (单价 ￥24.60)</p><p class="profit-high">当利润 40% 时(￥1066.17): 总售价 ￥2665.43 (单价 ￥26.65)</p></div>
+        <div class="profit-details" id="profitDetails"></div>
     </div>
     <footer>© 2024 灯具运费计算器 | 优化版</footer>
 
@@ -217,12 +223,33 @@
                 "西藏": { first: 32.4, additional: 26.5 }
             };
 
+
+       
             // 获取灯具单价
             const lampPrices = {
                 "low": 11,
                 "high": 13.5,
                 "doubleLow": 13.5,
-                "doubleHigh": 16
+                "doubleHigh": 16,
+                "c_dan_28": 28,
+                "c_dan_30": 30,
+                "c_shuang_28": 38,
+                "c_shuang_38": 41,
+                "c_30_120_38": 38,
+                "c_30_120_48": 44,
+                "c_30_120_78": 53,
+                "c_60_120_78": 95,
+                "30_30": 17,
+                "30_60": 27,
+                "30_90": 36,
+                "30_120_40": 31,
+                "30_120_48": 39,
+                "30_120_78": 46,
+                "30_120_fb": 120,
+                "60_60_40": 34,
+                "60_60_48": 45,
+                "60_60_78": 50,
+                "60_120": 95
             };
 
             const lampPrice = lampPrices[lampType];
@@ -295,6 +322,5 @@
             document.getElementById("profitDetails").innerHTML = profitMessage;
         }
     </script>
-
-
-</body></html>
+</body>
+</html>
